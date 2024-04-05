@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="RetoKarate.RetoKarate.main~1" target="1.8" />
+      <module name="RetoKarate.RetoKarate.test~1" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

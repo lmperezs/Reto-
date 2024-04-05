@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+ext {
+    karateVersion = '1.2.0.RC3'
+}
+
+dependencies {
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.429')
+    implementation 'software.amazon.awssdk:s3:2.25.23'
+    testImplementation "com.intuit.karate:karate-junit5:${karateVersion}"
+    testImplementation "net.masterthought:cucumber-reporting:3.8.0"
+    implementation 'com.amazonaws:aws-java-sdk-lambda:1.11.228'
+    implementation 'com.amazonaws:aws-java-sdk-s3'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDir file('src/test/java')
+            exclude '**/*.java'
+        }
+    }
+}
+
+test {
+    useJUnitPlatform() // junit5
+    systemProperty "karate.env", System.properties.getProperty("karate.env")
+    systemProperties = System.properties
+    outputs.upToDateWhen { false }
+}
+
+repositories {
+    mavenCentral()
+}
+gradle.startParameter.refreshDependencies = true
